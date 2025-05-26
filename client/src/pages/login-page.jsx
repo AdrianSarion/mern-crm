@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Spinner } from "@/components/ui/spinner";
 
-import { NotebookTabs } from "lucide-react";
+import { NotebookTabs, Mail, Lock, LogIn, Github } from "lucide-react";
 import { useLoginMutation } from "@/features/api/auth";
 import { userHasAuthenticated } from "@/features/auth/slice";
 import { useDispatch } from "react-redux";
@@ -55,27 +55,26 @@ export default function LogInPage() {
   };
 
   return (
-    <div className="container relative h-screen w-screen mx-0 grid items-center justify-center max-w-none lg:grid-cols-[1fr_1fr_1fr] lg:px-0 bg-gradient-to-l from-lime-30 to-stone-500">
-      <div className="relative hidden h-full flex-col self-start bg-muted p-10 text-white dark:border-r lg:flex">
-        <div className="absolute inset-0" />
+    <div className="container relative h-screen w-screen mx-0 grid items-center justify-center max-w-none lg:grid-cols-[1fr_1fr_1fr] lg:px-0 bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900">
+      <div className="relative hidden h-full flex-col self-start p-10 text-white dark:border-r lg:flex">
         <div className="relative z-20 flex items-center text-lg font-medium gap-2">
-          <NotebookTabs />
-          sanzCRM
+          <NotebookTabs className="h-6 w-6 text-blue-400" />
+          <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-teal-400 text-transparent bg-clip-text">Clikkle</span>
         </div>
 
         <div className="relative z-20 mt-auto">
           <blockquote className="space-y-2">
-            <p className="text-lg">&ldquo;Dêpechez vous.&rdquo;</p>
-            <footer className="text-sm">&nbsp;– l&apos;Bacha</footer>
+            <p className="text-lg text-gray-300">&ldquo;Streamline your business with Clikkle, the modern CRM solution.&rdquo;</p>
+            <footer className="text-sm text-gray-400">- Team Clikkle</footer>
           </blockquote>
         </div>
       </div>
 
-      <Card className="max-w-sm mx-auto shadow-xl">
-        <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
+      <Card className="max-w-sm mx-auto shadow-2xl bg-gray-900/50 backdrop-blur-sm border-gray-800">
+        <CardHeader className="space-y-1">
+          <CardTitle className="text-2xl font-bold text-white">Welcome back</CardTitle>
+          <CardDescription className="text-gray-400">
+            Enter your credentials to access your account
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -83,49 +82,63 @@ export default function LogInPage() {
             <form onSubmit={handleSubmit(onSubmit)}>
               <div className="grid gap-4">
                 <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    placeholder="m@example.com"
-                    autoComplete="current-email"
-                    {...register("email")}
-                  />
+                  <Label htmlFor="email" className="text-gray-300">Email</Label>
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <Input
+                      id="email"
+                      placeholder="m@example.com"
+                      autoComplete="current-email"
+                      className="pl-10 bg-gray-800/50 border-gray-700 text-white placeholder:text-gray-500"
+                      {...register("email")}
+                    />
+                  </div>
                   {errors.email && (
-                    <p className="text-red-500 text-xs">{errors.email.message}</p>
+                    <p className="text-red-400 text-xs">{errors.email.message}</p>
                   )}
                 </div>
                 <div className="grid gap-2">
                   <div className="flex items-center">
-                    <Label htmlFor="password">Password</Label>
+                    <Label htmlFor="password" className="text-gray-300">Password</Label>
                     <Link
                       to="#"
-                      className="ml-auto inline-block text-xs text-neutral-500 underline">
-                      Forgot your password?
+                      className="ml-auto inline-block text-xs text-gray-400 hover:text-blue-400 transition-colors">
+                      Forgot password?
                     </Link>
                   </div>
-                  <Input
-                    id="password"
-                    type="password"
-                    autoComplete="current-password"
-                    {...register("password")}
-                  />
+                  <div className="relative">
+                    <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
+                    <Input
+                      id="password"
+                      type="password"
+                      autoComplete="current-password"
+                      className="pl-10 bg-gray-800/50 border-gray-700 text-white"
+                      {...register("password")}
+                    />
+                  </div>
                   {errors.password && (
-                    <p className="text-red-500 text-xs">{errors.password.message}</p>
+                    <p className="text-red-400 text-xs">{errors.password.message}</p>
                   )}
                   {err && err.originalStatus === 401 && (
-                    <p className="text-red-500 text-xs">Invalid credentials.</p>
+                    <p className="text-red-400 text-xs">Invalid credentials.</p>
                   )}
                 </div>
-                <Button type="submit" disabled={isSubmitting} className="w-full">
-                  {isSubmitting || isLoading ? <Spinner /> : "Login"}
+                <Button type="submit" disabled={isSubmitting} className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                  {isSubmitting || isLoading ? <Spinner /> : (
+                    <div className="flex items-center justify-center gap-2">
+                      <LogIn className="h-4 w-4" />
+                      <span>Sign In</span>
+                    </div>
+                  )}
                 </Button>
-                <Button variant="outline" role="lbrd" className="w-full">
-                  Login with Google
+                <Button variant="outline" role="lbrd" className="w-full border-gray-700 text-gray-300 hover:text-white hover:bg-gray-800">
+                  <Github className="mr-2 h-4 w-4" />
+                  Continue with GitHub
                 </Button>
               </div>
-              <div className="mt-4 text-center text-sm">
+              <div className="mt-6 text-center text-sm text-gray-400">
                 Don&apos;t have an account?{" "}
-                <Link to="/signup" className="underline">
+                <Link to="/signup" className="text-blue-400 hover:text-blue-300 underline underline-offset-4">
                   Sign up
                 </Link>
               </div>

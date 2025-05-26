@@ -31,69 +31,79 @@ const Navbar = () => {
       align="center"
       justify="space-between"
       wrap="wrap"
-      px={4}
+      px={6}
       py={3}
-      bg="white"
+      bg="rgba(17,24,39,0.85)"
+      style={{ backdropFilter: 'blur(8px)' }}
       borderBottom="1px solid"
-      borderColor="gray.200">
+      borderColor="gray.800"
+      color="white"
+      minH="64px"
+      w="100%"
+      ml={0}
+      mt={0}
+      position="sticky"
+      top={0}
+      zIndex={100}
+    >
       {/* Search bar */}
       <Flex alignItems="center">
         <Box display={{ base: "none", md: "block" }} mr={4}>
           <IconButton
-            ml={40}
             aria-label="Search"
-            icon={<SearchIcon />}
+            icon={<SearchIcon color="gray.300" />}
             colorScheme="gray"
             borderRadius="50%"
             bg="transparent"
-            _hover={{ bg: "gray.100" }}
+            _hover={{ bg: "gray.700" }}
           />
         </Box>
         <Input
           placeholder="Search..."
-          bg="gray.100"
-          color="black"
+          bg="gray.800"
+          color="gray.100"
           border="1px solid"
-          borderColor="gray.200"
+          borderColor="gray.700"
           borderRadius="md"
           width={{ base: "full", md: "250px" }}
-          _hover={{ borderColor: "gray.300" }}
+          _hover={{ borderColor: "gray.500" }}
           _focus={{ borderColor: "blue.400" }}
+          _placeholder={{ color: "gray.400" }}
         />
       </Flex>
 
       {/* Right side */}
-      <Flex alignItems="center" mr={10}>
+      <Flex alignItems="center" mr={0}>
         {/* Notification icons */}
         <IconButton
           aria-label="Notifications"
-          icon={<BellIcon />}
+          icon={<BellIcon color="gray.300" />}
           colorScheme="gray"
           borderRadius="50%"
           mr={2}
           bg="transparent"
-          _hover={{ bg: "gray.100" }}
+          _hover={{ bg: "gray.700" }}
         />
         <IconButton
           aria-label="Messages"
-          icon={<EmailIcon />}
+          icon={<EmailIcon color="gray.300" />}
           colorScheme="gray"
           borderRadius="50%"
           mr={2}
           bg="transparent"
-          _hover={{ bg: "gray.100" }}
+          _hover={{ bg: "gray.700" }}
         />
         <IconButton
           aria-label="Info"
-          icon={<InfoOutlineIcon />}
+          icon={<InfoOutlineIcon color="gray.300" />}
           colorScheme="gray"
           borderRadius="50%"
           mr={2}
           bg="transparent"
-          _hover={{ bg: "gray.100" }}
+          _hover={{ bg: "gray.700" }}
         />
 
-        <Box as="span" mr={4} fontWeight="bold">
+        <Box as="span" mr={4} fontWeight="bold" color="gray.100">
           Welcome back {user?.firstName ?? "User"}!
         </Box>
 
@@ -103,25 +113,25 @@ const Navbar = () => {
             as={Avatar}
             bg="black"
             color="white"
-            //p={2}
             src={user?.avatar}
             name={`${user?.firstName ?? "Unknown"} ${user?.lastName ?? "User"}`}
             boxSize="40px"
             aria-label="Options"
-            variant="outline">
+            variant="outline"
+          >
             <AvatarBadge boxSize="0.9em" bg="green.500" />
           </MenuButton>
-          <MenuList>
+          <MenuList bg="gray.900" color="gray.100" borderColor="gray.700">
             <MenuItem
               as={RouterLink}
               to="/profile"
-              icon={<AddIcon />}
-              _hover={{ bg: "gray.100" }}>
+              icon={<AddIcon color="gray.300" />}
+              _hover={{ bg: "gray.700" }}>
               Profile
             </MenuItem>
-            <MenuItem icon={<ExternalLinkIcon />}>New Window</MenuItem>
-            <MenuItem icon={<RepeatIcon />}>Open Closed Tab</MenuItem>
-            <MenuItem icon={<EditIcon />}>Open File...</MenuItem>
+            <MenuItem icon={<ExternalLinkIcon color="gray.300" />}>New Window</MenuItem>
+            <MenuItem icon={<RepeatIcon color="gray.300" />}>Open Closed Tab</MenuItem>
+            <MenuItem icon={<EditIcon color="gray.300" />}>Open File...</MenuItem>
           </MenuList>
         </Menu>
       </Flex>

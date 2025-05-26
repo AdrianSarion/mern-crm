@@ -26,12 +26,8 @@ export default function Root() {
         gap="1"
         color="blackAlpha.700">
         <GridItem
-          p="2"
-          pos="relative"
-          bg="RGBA(0, 0, 0, 0.02)"
+          bg="transparent"
           w="100%"
-          ml={1}
-          mt={2}
           area={"header"}>
           <Navbar />
         </GridItem>

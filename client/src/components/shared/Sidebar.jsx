@@ -1,11 +1,25 @@
-import { useGetCompaniesListQuery } from "@/features/api/companies";
-import { ArrowRightIcon } from "@chakra-ui/icons";
+import React, { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
+import {
+  LayoutDashboard,
+  Building2,
+  BarChart2,
+  Users2,
+  Handshake,
+  ListTodo,
+  LayoutGrid,
+  Mail,
+  MessageSquare,
+  Calendar,
+  Settings2,
+  ChevronDown,
+  ChevronRight,
+} from "lucide-react";
 import {
   VStack,
   Divider,
   Box,
   Link,
-  Center,
   Button,
   Text,
   Accordion,
@@ -15,20 +29,9 @@ import {
   AccordionIcon,
   Tooltip,
   Avatar,
+  Center,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
-import {
-  FaHome,
-  FaBuilding,
-  FaChartBar,
-  FaUsers,
-  FaMoneyBillWave,
-  FaListUl,
-  FaBars,
-} from "react-icons/fa";
-import { PiKanbanBold } from "react-icons/pi";
-import { Link as RouterLink } from "react-router-dom";
-import Logo from "./Logo";
+import { useGetCompaniesListQuery } from "@/features/api/companies";
 
 const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -40,160 +43,132 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
 
   return (
     <VStack
-      className="custom-scrollbar"
-      spacing={2}
+      className="custom-scrollbar bg-gradient-to-br from-gray-900 via-slate-800 to-gray-900"
+      spacing={0}
       align="stretch"
       fontSize="14px"
       overflowY="auto"
-      mt={2}
       fontWeight="normal"
       w={isSidebarOpen ? { base: "200px", md: "250px" } : { base: "70px", md: "70px" }}
       transition="width 0.3s ease"
-      boxShadow="md"
-      bg="white"
       minH="100vh"
       maxH="100vh"
-      ml={isSidebarOpen ? 0 : -4} // Reduced margin-left when sidebar is closed
+      m={0}
+      p={0}
+      borderRight="1px solid #0000001A"
+      position="fixed"
+      top={0}
+      left={0}
+      zIndex={100}
       display="flex"
       flexDirection="column"
-      alignItems={isSidebarOpen ? "stretch" : "center"} // Center elements when sidebar is closed
+      alignItems={isSidebarOpen ? "stretch" : "center"}
     >
-      <Center flexDirection="column" py={4}>
-        <Logo />
-      </Center>
-
-      <Divider mb={2} mt={6} />
-
-      <Button
-        position="fixed"
-        top={120}
-        mr={-4}
-        onClick={toggleSidebar}
-        bg="none"
-        _hover={{ color: "gray" }}
-        style={{ alignSelf: isSidebarOpen ? "flex-end" : "center" }} // Center button when sidebar is closed
-        display={isSidebarOpen ? "block" : "none"}>
-        <FaBars size={20} />
-      </Button>
-
-      <Center display={isSidebarOpen ? "none" : "flex"}>
-        <Button bg="none" _hover={{ bg: "gray.50" }} onClick={toggleSidebar}>
-          <ArrowRightIcon />
-        </Button>
-      </Center>
-
+      <Divider mb={2} mt={0} borderColor="#0000001A" />
       <NavItem
-        icon={FaHome}
+        icon={LayoutDashboard}
         label="Dashboard"
         to="/dashboard"
         isSidebarOpen={isSidebarOpen}
       />
-      <Divider mb={2} mt={2} />
       <NavItem
-        icon={FaBuilding}
+        icon={Building2}
         label="Companies"
         to="/companies"
         isSidebarOpen={isSidebarOpen}
       />
-
-      {isSidebarOpen && (
-        <Accordion allowMultiple>
-          <AccordionItem>
-            <h2>
-              <AccordionButton
-                _expanded={{ bg: "gray.100", color: "black" }}
-                onClick={toggleExpansion}>
-                <Box as="span" flex="1" textAlign="left">
-                  {isExpanded ? "Less" : "More"}
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
-            <AccordionPanel>
-              {isLoading && <Text>Loading...</Text>}
-              {error && <Text>Error: {error.message}</Text>}
-              {companies.map((company) => (
-                <Link
-                  as={RouterLink}
-                  to={`/companies/${company._id}`}
-                  key={company._id}
-                  py={1}
-                  _hover={{ textDecoration: "none", bg: "blue.50" }}
-                  display="flex"
-                  justifyContent={isSidebarOpen ? "start" : "center"}>
-                  <Avatar
-                    size="sm"
-                    name={company.name}
-                    src={company.logo ? company.logo : ""}
-                  />
-                  <Text ml={isSidebarOpen ? 4 : 0}>{company.name}</Text>
-                </Link>
-              ))}
-            </AccordionPanel>
-          </AccordionItem>
-        </Accordion>
-      )}
-
-      <NavItem
-        icon={FaChartBar}
-        label="Stats"
-        to="/stats"
-        isSidebarOpen={isSidebarOpen}
-      />
-      <NavItem
-        icon={FaUsers}
-        label="Contacts"
-        to="/contacts"
-        isSidebarOpen={isSidebarOpen}
-      />
-      <NavItem
-        icon={FaMoneyBillWave}
-        label="Deals"
-        to="/deals"
-        isSidebarOpen={isSidebarOpen}
-      />
-      <NavItem icon={FaListUl} label="Tasks" to="/tasks" isSidebarOpen={isSidebarOpen} />
-      <NavItem
-        icon={PiKanbanBold}
-        label="Kanban"
-        to="/kanban"
-        isSidebarOpen={isSidebarOpen}
-      />
-
-      <Divider m={4} />
-
-      <NavItem label="Emails" isSidebarOpen={isSidebarOpen} />
-      <NavItem label="Chat" isSidebarOpen={isSidebarOpen} />
-      <NavItem label="Calendar" isSidebarOpen={isSidebarOpen} />
-      <NavItem label="More..." isSidebarOpen={isSidebarOpen} />
-
+      <Accordion allowMultiple w="100%" borderColor="transparent">
+        <AccordionItem border="none">
+          <h2>
+            <AccordionButton
+              _expanded={{ bg: "#334155", color: "#fff" }}
+              onClick={toggleExpansion}
+              px={isSidebarOpen ? 4 : 2}
+              py={2}
+              borderRadius={0}
+              _focus={{ boxShadow: "none" }}
+              bg="none"
+              color="#F3F4F6"
+            >
+              <Box as="span" flex="1" textAlign="left" color="inherit" fontWeight="normal">
+                {isSidebarOpen ? (isExpanded ? "Less" : "More") : <ChevronDown size={18} color="#F3F4F6" />}
+              </Box>
+              <AccordionIcon />
+            </AccordionButton>
+          </h2>
+          <AccordionPanel p={0} bg="none">
+            <NavItem
+              icon={BarChart2}
+              label="Stats"
+              to="/stats"
+              isSidebarOpen={isSidebarOpen}
+            />
+            <NavItem
+              icon={Users2}
+              label="Contacts"
+              to="/contacts"
+              isSidebarOpen={isSidebarOpen}
+            />
+            <NavItem
+              icon={Handshake}
+              label="Deals"
+              to="/deals"
+              isSidebarOpen={isSidebarOpen}
+            />
+            <NavItem
+              icon={ListTodo}
+              label="Tasks"
+              to="/tasks"
+              isSidebarOpen={isSidebarOpen}
+            />
+            <NavItem
+              icon={LayoutGrid}
+              label="Kanban"
+              to="/kanban"
+              isSidebarOpen={isSidebarOpen}
+            />
+          </AccordionPanel>
+        </AccordionItem>
+      </Accordion>
+      <Divider m={2} borderColor="#0000001A" />
+      <NavItem icon={Mail} label="Emails" to="/emails" isSidebarOpen={isSidebarOpen} />
+      <NavItem icon={MessageSquare} label="Chat" to="/chat" isSidebarOpen={isSidebarOpen} />
+      <NavItem icon={Calendar} label="Calendar" to="/calendar" isSidebarOpen={isSidebarOpen} />
       <Box
-        as="span"
+        as={RouterLink}
+        to="/settings"
         py={2}
         px={isSidebarOpen ? 4 : 2}
         mt="auto"
-        _hover={{ textDecoration: "none", bg: "blue.50" }}
+        _hover={{ textDecoration: "none", bg: "#334155", color: "#fff" }}
         display="flex"
         alignItems="center"
-        justifyContent={isSidebarOpen ? "start" : "center"}>
-        Settings
+        color="#F3F4F6"
+        fontWeight="normal"
+        fontSize="14px"
+      >
+        <Settings2 size={18} style={{ marginRight: isSidebarOpen ? 16 : 0, color: '#F3F4F6' }} />
+        {isSidebarOpen && "Settings"}
       </Box>
     </VStack>
   );
 };
 
-const NavItem = ({ icon, label, to, isSidebarOpen }) => (
-  <Tooltip label={label} placement="right" isDisabled={isSidebarOpen}>
+const NavItem = ({ icon: Icon, label, to, isSidebarOpen }) => (
+  <Tooltip label={label} placement="right" isDisabled={isSidebarOpen} hasArrow>
     <Link
       as={RouterLink}
       to={to}
       py={2}
       px={isSidebarOpen ? 4 : 2}
-      _hover={{ textDecoration: "none", bg: "blue.50" }}
+      _hover={{ textDecoration: "none", bg: "#334155", color: "#fff" }}
       display="flex"
       alignItems="center"
-      justifyContent={isSidebarOpen ? "start" : "center"}>
-      {icon && React.createElement(icon)}
+      color="#F3F4F6"
+      fontWeight="normal"
+      fontSize="14px"
+    >
+      {Icon && <Icon size={18} style={{ minWidth: 18, minHeight: 18, color: '#F3F4F6' }} className="group-hover:text-white" />}
       {isSidebarOpen && <Box ml={4}>{label}</Box>}
     </Link>
   </Tooltip>

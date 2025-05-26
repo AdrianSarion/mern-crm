@@ -8,30 +8,32 @@ export function Nav({ links, isCollapsed }) {
   return (
     <div
       data-collapsed={isCollapsed}
-      className="group flex flex-col gap-4 py-2 data-[collapsed=true]:py-2">
-      <nav className="grid gap-1 px-2 group-[[data-collapsed=true]]:justify-center group-[[data-collapsed=true]]:px-2">
+      className="group flex flex-col py-1 bg-transparent">
+      <nav className="grid gap-0.5 group-[[data-collapsed=true]]:justify-center">
         {links.map((link, index) =>
-        isCollapsed ? (
+          isCollapsed ? (
             <Tooltip key={index} delayDuration={0}>
               <TooltipTrigger asChild>
                 <div>
                   <NavLink
                     to={link.href}
                     className={({ isActive }) => {
-                    return cn(
-                      buttonVariants({ variant: isActive ? "default" : "ghost", size: "icon" }),
-                      isActive && "bg-[#393e3f] dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white",
-                      )}}>
-                    <link.icon className="h-4 w-4" />
+                      return cn(
+                        buttonVariants({ variant: "ghost", size: "sm" }),
+                        "h-9 w-9 p-0 flex items-center justify-center",
+                        "text-gray-400 hover:text-white hover:bg-gray-700",
+                        isActive && "bg-gray-700 text-white"
+                      )
+                    }}>
+                    <link.icon className="h-[18px] w-[18px]" />
                     <span className="sr-only">{link.title}</span>
                   </NavLink>
                 </div>
               </TooltipTrigger>
-              <TooltipContent side="right" className="flex items-center gap-4">
+              <TooltipContent 
+                side="right" 
+                className="flex items-center gap-4 bg-gray-800 border-gray-700 text-gray-100">
                 {link.title}
-                {/* {link.label && (
-                  <span className="ml-auto text-muted-foreground">{link.label}</span>
-                )} */}
               </TooltipContent>
             </Tooltip>
           ) : (
@@ -40,12 +42,14 @@ export function Nav({ links, isCollapsed }) {
               to={link.href}
               className={({ isActive }) => {
                 return cn(
-                buttonVariants({ variant: isActive ? "default" : "ghost", size: "sm" }),
-                isActive && "bg-[#393e3f] dark:bg-muted dark:text-white dark:hover:bg-muted dark:hover:text-white",
-                "justify-start",
-              )}}>
-              <link.icon className="mr-2 h-4 w-4" />
-              {link.title}
+                  buttonVariants({ variant: "ghost", size: "sm" }),
+                  "justify-start h-9 px-2",
+                  "text-gray-400 hover:text-white hover:bg-gray-700",
+                  isActive && "bg-gray-700 text-white"
+                )
+              }}>
+              <link.icon className="mr-2 h-[18px] w-[18px]" />
+              <span className="text-sm">{link.title}</span>
             </NavLink>
           ),
         )}

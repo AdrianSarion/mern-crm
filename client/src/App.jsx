@@ -43,13 +43,13 @@ export default function App() {
             gap="1"
             color="blackAlpha.700"
             minH="100vh">
-            <GridItem bg="RGBA(0, 0, 0, 0.02)" area="header">
+            <GridItem bg="transparent" area="header">
               <Navbar />
             </GridItem>
             <GridItem bg="RGBA(0, 0, 0, 0.02)" area="nav">
               <Sidebar toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} />
             </GridItem>
-            <GridItem area="main" overflow="auto">
+            <GridItem area="main" overflow="auto" bgGradient="linear(to-br, gray.900, slate.800, gray.900)">
               <Routes>
                 <Route
                   path="/profile"

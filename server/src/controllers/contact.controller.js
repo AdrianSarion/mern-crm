@@ -78,3 +78,19 @@ exports.deleteContact = async (req, res) => {
     return handleError(err, res);
   }
 };
+
+exports.importContactsFromCSV = async (req, res) => {
+  try {
+    const contacts = req.body.contacts;
+    if (!Array.isArray(contacts) || contacts.length === 0) {
+      return res.status(400).json({ message: "No contacts provided." });
+    }
+    // Add createdBy to each contact
+    const contactsToInsert = contacts.map((c) => ({ ...c, createdBy: req.user._id }));
+    // Use writeContacts for bulk insert
+    const result = await writeContacts(contactsToInsert, "insertOne");
+    res.status(201).json({ message: "Contacts imported successfully.", result });
+  } catch (err) {
+    handleError(err, res);
+  }
+};

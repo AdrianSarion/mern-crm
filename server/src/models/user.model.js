@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const { hashPassword, hashExistingPassword } = require("../lib/bcrypt");
 const { logger } = require("../utils/logger");
 const { sendConfirmationMail } = require("../services/emails/post");
-const crypto = require("crypto");
 
 const UserSchema = new mongoose.Schema(
   {

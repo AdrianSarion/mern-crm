@@ -12,11 +12,13 @@
 html {
   overflow: hidden;
   height: 100%;
+  background: linear-gradient(to bottom right, #0f172a, #1e293b, #0f172a) !important;
 }
 
 body {
   height: 100%;
   overflow: auto;
+  background: linear-gradient(to bottom right, #0f172a, #1e293b, #0f172a) !important;
 }
 
 .ProseMirror:focus {

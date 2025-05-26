@@ -5,6 +5,7 @@ const {
   updateContact,
   deleteContact,
   createContacts,
+  importContactsFromCSV,
 } = require("../controllers/contact.controller");
 const { validateParamsId, validateBodyData } = require("../middlewares/validator");
 const sanitizeBodyData = require("../middlewares/sanitizer");
@@ -23,6 +24,7 @@ contactRouter.patch(
   updateContact,
 );
 contactRouter.delete("/:id", isAuth, validateParamsId, deleteContact);
+contactRouter.post("/import-csv", isAuth, importContactsFromCSV);
 
 // contactRouter.get('/analytics')
 // contactRouter.get('/analytics/:id')

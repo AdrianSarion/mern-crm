@@ -63,7 +63,7 @@ const CompaniesList = () => {
 
   if (isLoading) {
     return (
-      <Center height="100vh">
+      <Center height="100vh" bgGradient="linear(to-br, gray.900, slate.800, gray.900)">
         <Spinner size="xl" />
       </Center>
     );
@@ -71,15 +71,15 @@ const CompaniesList = () => {
 
   if (error) {
     return (
-      <Center height="100vh" className="px-4">
+      <Center height="100vh" className="px-4" bgGradient="linear(to-br, gray.900, slate.800, gray.900)">
         <Text color="red.500">{error.message}</Text>
       </Center>
     );
   }
 
   return (
-    <Box className="px-4">
-      <Heading as="h1" size="xl" mb={6}>
+    <Box px={0} py={0} minH="100vh" bg="transparent">
+      <Heading as="h1" size="xl" mb={6} color="gray.100">
         Companies
       </Heading>
       <Input
@@ -87,6 +87,10 @@ const CompaniesList = () => {
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         mb={4}
+        bg="gray.800"
+        color="gray.100"
+        borderColor="gray.700"
+        _placeholder={{ color: "gray.400" }}
       />
       <SimpleGrid spacing={6} templateColumns="repeat(auto-fill, minmax(250px, 1fr))">
         {filteredCompanies.map((company) => {
@@ -94,9 +98,12 @@ const CompaniesList = () => {
           return (
             <Card
               key={company._id}
-              bgGradient="linear(to-t, RGBA(0, 0, 0, 0.06), #FFFFFF)"
-              boxShadow="md"
-              rounded="md">
+              bg="gray.900"
+              color="gray.100"
+              boxShadow="lg"
+              rounded="md"
+              borderWidth={1}
+              borderColor="gray.700">
               <CardBody>
                 <Center>
                   <VStack>
@@ -105,22 +112,22 @@ const CompaniesList = () => {
                         <Image as={Avatar} src={company.logo} />
                       </Box>
                     ) : (
-                      <Box borderRadius="50px" p={2} color="white" bg="gray.200">
+                      <Box borderRadius="50px" p={2} color="white" bg="gray.700">
                         <IconComponent size={40} />
                       </Box>
                     )}
-                    <Text>{company.name}</Text>
+                    <Text color="gray.100">{company.name}</Text>
                   </VStack>
                 </Center>
-                <Text fontSize="lg" color="gray.500">
+                <Text fontSize="lg" color="gray.400">
                   Industry: {company.industry}
                 </Text>
                 {company.ownership && (
-                  <Text fontSize="lg" color="gray.500">
+                  <Text fontSize="lg" color="gray.400">
                     Owner: {company.ownership}
                   </Text>
                 )}
-                <Text mt={2} fontSize="md" color="blue.500">
+                <Text mt={2} fontSize="md" color="blue.400">
                   <Link href={company.website} isExternal>
                     {company.website}
                   </Link>
@@ -136,10 +143,10 @@ const CompaniesList = () => {
                 </Button>
                 <Button
                   onClick={() => handleDeleteClick(company)}
-                  bg="gray.100"
-                  color="red.500"
+                  bg="gray.700"
+                  color="red.400"
                   ml={2}
-                  leftIcon={<DeleteIcon color="red.500" />}>
+                  leftIcon={<DeleteIcon color="red.400" />}>
                   Delete
                 </Button>
               </CardFooter>
@@ -147,12 +154,15 @@ const CompaniesList = () => {
           );
         })}
         <Card
-          bgGradient="linear(to-t, RGBA(0, 0, 0, 0.06), #FFFFFF)"
-          boxShadow="md"
+          bg="gray.900"
+          color="gray.100"
+          boxShadow="lg"
           rounded="md"
-          _hover={{ bg: "RGBA(0, 0, 0, 0.04)", boxShadow: "2xl" }}>
-          <CardHeader bg="gray.50">
-            <Heading size="md">
+          borderWidth={1}
+          borderColor="gray.700"
+          _hover={{ bg: "gray.800", boxShadow: "2xl" }}>
+          <CardHeader bg="gray.900">
+            <Heading size="md" color="gray.100">
               <Center>Add new company</Center>
             </Heading>
           </CardHeader>

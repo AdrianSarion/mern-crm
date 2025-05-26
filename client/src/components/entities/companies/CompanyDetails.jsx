@@ -17,6 +17,8 @@ import {
   TabPanel,
   Image,
   Avatar,
+  Center,
+  VStack,
 } from "@chakra-ui/react";
 import { FaRegBuilding, FaDollarSign } from "react-icons/fa";
 import { LiaUsersSolid } from "react-icons/lia";
@@ -53,8 +55,8 @@ const CompanyDetails = () => {
     );
   }
   return (
-    <Box p={{ base: 4, md: 8 }}>
-      <Heading mb={4} textAlign="center">
+    <Box px={0} py={0} minH="100vh" bg="gray.900">
+      <Heading mb={4} textAlign="center" color="gray.100">
         {company.name}
       </Heading>
 
@@ -67,44 +69,55 @@ const CompanyDetails = () => {
 
         <TabPanels>
           <TabPanel>
+            <Center>
+              <Card
+                maxW="lg"
+                w="100%"
+                bg="gray.900"
+                color="gray.100"
+                boxShadow="lg"
+                rounded="md"
+                borderWidth={1}
+                borderColor="gray.700"
+              >
+                <CardBody>
+                  <Center>
+                    <VStack>
+                      {company.logo ? (
+                        <Box borderRadius="50px" color="white" bg="none">
+                          <Image as={Avatar} src={company.logo} boxSize="70px" />
+                        </Box>
+                      ) : (
+                        <Box borderRadius="50px" p={2} color="white" bg="gray.700">
+                          <FaRegBuilding color="rgba(54, 162, 235, 0.54)" size="70px" />
+                        </Box>
+                      )}
+                      <Text color="gray.100" fontWeight="bold" fontSize="xl">
+                        {company.name}
+                      </Text>
+                    </VStack>
+                  </Center>
+                  <Text fontSize="md" color="gray.400" mt={2}>
+                    Industry: {company.industry}
+                  </Text>
+                  <Text fontSize="md" color="gray.400">
+                    Type: {company.companyType}
+                  </Text>
+                  <Text fontSize="md" color="blue.400">
+                    Website: {company.website}
+                  </Text>
+                  <Divider my={3} borderColor="gray.700" />
+                  <Text color="gray.400">{company.description}</Text>
+                </CardBody>
+              </Card>
+            </Center>
             <Grid
-              templateRows={{ base: "repeat(4, 1fr)", md: "repeat(1, 1fr)" }}
-              templateColumns={{ base: "1fr", md: "repeat(4, 1fr)" }}
+              templateRows={{ base: "repeat(3, 1fr)", md: "repeat(1, 1fr)" }}
+              templateColumns={{ base: "1fr", md: "repeat(3, 1fr)" }}
               gap={4}
               mt={4}>
               <GridItem>
-                <Card p={2} maxW="sm" mx="auto">
-                  <CardBody>
-                    <Stack spacing={3}>
-                      <Heading display="flex" size="md">
-                        <Box borderRadius="10px" p={2}>
-                          {company.logo ? (
-                            <Image
-                              as={Avatar}
-                              src={company.logo}
-                              alt="Company Logo"
-                              boxSize="50px"
-                            />
-                          ) : (
-                            <FaRegBuilding color="rgba(54, 162, 235, 0.54)" size="50px" />
-                          )}
-                        </Box>
-
-                        <Text ml={4} mt={2}>
-                          {company.name}
-                        </Text>
-                      </Heading>
-                      <Text>Industry: {company.industry}</Text>
-                      <Text>Type: {company.companyType}</Text>
-                      <Text>Website: {company.website}</Text>
-                      <Divider />
-                      <Text color="gray.600">{company.description}</Text>
-                    </Stack>
-                  </CardBody>
-                </Card>
-              </GridItem>
-              <GridItem>
-                <Card mx="auto">
+                <Card mx="auto" bg="gray.900" color="gray.100" boxShadow="lg" rounded="md" borderWidth={1} borderColor="gray.700">
                   <CardBody>
                     <Stack>
                       <HStack>
@@ -113,14 +126,14 @@ const CompanyDetails = () => {
                         </Box>
                         <Heading fontSize="lg">Annual Revenue</Heading>
                       </HStack>
-                      <Divider />
+                      <Divider borderColor="gray.700" />
                       <Text textAlign="center">{company.annualRevenue}</Text>
                     </Stack>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem>
-                <Card mx="auto">
+                <Card mx="auto" bg="gray.900" color="gray.100" boxShadow="lg" rounded="md" borderWidth={1} borderColor="gray.700">
                   <CardBody>
                     <Stack>
                       <HStack>
@@ -129,14 +142,14 @@ const CompanyDetails = () => {
                         </Box>
                         <Heading fontSize="lg">Employees</Heading>
                       </HStack>
-                      <Divider />
+                      <Divider borderColor="gray.700" />
                       <Text textAlign="center">{company.employees}</Text>
                     </Stack>
                   </CardBody>
                 </Card>
               </GridItem>
               <GridItem>
-                <Card mx="auto">
+                <Card mx="auto" bg="gray.900" color="gray.100" boxShadow="lg" rounded="md" borderWidth={1} borderColor="gray.700">
                   <CardBody>
                     <Stack>
                       <HStack>
@@ -145,7 +158,7 @@ const CompanyDetails = () => {
                         </Box>
                         <Heading fontSize="lg">Rating</Heading>
                       </HStack>
-                      <Divider />
+                      <Divider borderColor="gray.700" />
                       <Text textAlign="center">{company.rating}</Text>
                     </Stack>
                   </CardBody>
@@ -157,7 +170,7 @@ const CompanyDetails = () => {
             <CompanyForm company={company} />
           </TabPanel>
           <TabPanel>
-            <Text>Future Needs Content Here</Text>
+            <Text color="gray.100">Future Needs Content Here</Text>
           </TabPanel>
         </TabPanels>
       </Tabs>

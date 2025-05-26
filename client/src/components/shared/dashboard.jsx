@@ -2,16 +2,20 @@
 
 import * as React from "react";
 import {
-  Archive,
-  Blocks,
-  Building,
-  ClipboardCheck,
-  GanttChart,
-  Handshake,
-  Search,
-  TrendingUp,
-  UserRound,
+  Home,
+  Building2,
+  BarChart2,
   Users2,
+  Video,
+  ListTodo,
+  LayoutGrid,
+  Mail,
+  MessageSquare,
+  Calendar,
+  Settings,
+  ChevronDown,
+  Menu,
+  Search,
 } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -33,6 +37,7 @@ import Cookies from "js-cookie";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Input } from "../ui/input";
 import { UserNav } from "./user-nav";
+import { Badge } from "../ui/badge";
 
 export function Dash({
   user,
@@ -51,7 +56,7 @@ export function Dash({
         onLayout={(sizes) => {
           Cookies.set("react-resizable-panels:layout", JSON.stringify(sizes));
         }}
-        className="min-h-screen w-full flex-col bg-muted/40 items-stretch">
+        className="h-screen items-stretch">
         <ResizablePanel
           defaultSize={defaultLayout[0]}
           collapsedSize={navCollapsedSize}
@@ -67,129 +72,139 @@ export function Dash({
             Cookies.set("react-resizable-panels:collapsed", JSON.stringify(true));
           }}
           className={cn(
+            "bg-[#FFFFFF] border-r border-[#0000001A]",
             isCollapsed && "min-w-[50px] transition-all duration-300 ease-in-out",
           )}>
           <div
             className={cn(
-              "flex h-[52px] items-center justify-center",
-              isCollapsed ? "h-[52px]" : "px-2",
+              "flex h-[52px] items-center border-b border-[#0000001A]",
+              isCollapsed ? "justify-center" : "px-2",
             )}>
             <div
               onClick={() => navigate("/")}
-              className={cn(
-                "relative z-20 flex items-center text-normal font-bold gap-1",
-                "bg-gradient-to-bl from-gray-900 to-lime-30 bg-clip-text text-transparent",
-                "cursor-pointer",
-              )}>
-              {isCollapsed ? (
-                <Tooltip>
-                  <TooltipTrigger>💼</TooltipTrigger>
-                  <TooltipContent side="right">sanzCRM</TooltipContent>
-                </Tooltip>
-              ) : (
-                "sanzCRM 💼"
+              className="flex items-center gap-2 cursor-pointer">
+              <img src="/logo.png" alt="Clikkle" className="h-8" />
+              {!isCollapsed && (
+                <span className="text-lg font-semibold text-[#000000DE]">
+                  Clikkle
+                </span>
               )}
             </div>
           </div>
-          <Separator />
           <Nav
             isCollapsed={isCollapsed}
             links={[
               {
-                title: "Overview",
-                label: "",
+                title: "Dashboard",
                 href: "/overview",
-                icon: GanttChart,
+                icon: Home,
                 variant: "ghost",
               },
               {
                 title: "Companies",
-                label: "2",
                 href: "/companies",
-                icon: Building,
-                variant: "ghost",
-              },
-              {
-                title: "Staff",
-                label: "1",
-                href: "/users",
-                icon: UserRound,
+                icon: Building2,
                 variant: "ghost",
               },
             ]}
           />
-          <Separator />
+          <div className={cn("px-2 py-2", isCollapsed && "hidden")}>
+            <div className="flex items-center justify-between text-sm text-[#00000099]">
+              <span>More</span>
+              <ChevronDown className="h-4 w-4" />
+            </div>
+          </div>
           <Nav
             isCollapsed={isCollapsed}
             links={[
               {
+                title: "Stats",
+                href: "/stats",
+                icon: BarChart2,
+                variant: "ghost",
+              },
+              {
                 title: "Contacts",
-                label: "12",
                 href: "/contacts",
                 icon: Users2,
                 variant: "ghost",
               },
               {
-                title: "Tasks",
-                label: "2",
-                href: "/tasks",
-                icon: ClipboardCheck,
-                variant: "ghost",
-              },
-              {
                 title: "Deals",
-                label: "12",
                 href: "/deals",
-                icon: Handshake,
+                icon: Video,
                 variant: "ghost",
               },
               {
-                title: "Archive",
-                label: "21",
-                href: "/archive",
-                icon: Archive,
+                title: "Tasks",
+                href: "/tasks",
+                icon: ListTodo,
+                variant: "ghost",
+              },
+              {
+                title: "Kanban",
+                href: "/kanban",
+                icon: LayoutGrid,
                 variant: "ghost",
               },
             ]}
           />
-          <Separator />
           <Nav
             isCollapsed={isCollapsed}
             links={[
               {
-                title: "Analytics",
-                label: "",
-                href: "/analytics",
-                icon: TrendingUp,
+                title: "Emails",
+                href: "/emails",
+                icon: Mail,
                 variant: "ghost",
               },
               {
-                title: "Integrations",
-                label: "",
-                href: "/integrations",
-                icon: Blocks,
+                title: "Chat",
+                href: "/chat",
+                icon: MessageSquare,
+                variant: "ghost",
+              },
+              {
+                title: "Calendar",
+                href: "/calendar",
+                icon: Calendar,
+                variant: "ghost",
+              },
+            ]}
+          />
+          <Nav
+            isCollapsed={isCollapsed}
+            links={[
+              {
+                title: "Settings",
+                href: "/settings",
+                icon: Settings,
                 variant: "ghost",
               },
             ]}
           />
         </ResizablePanel>
-        <ResizableHandle withHandle />
-        <ResizablePanel defaultSize={defaultLayout[1]} minSize={30}>
-          <div className="flex justify-between items-center px-4 py-2">
-            <div className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-              <form>
-                <div className="relative">
-                  <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-                  <Input placeholder="Search" className="pl-8" />
-                </div>
-              </form>
+        <ResizableHandle withHandle className="bg-[#0000001A]" />
+        <ResizablePanel defaultSize={defaultLayout[1]} minSize={30} className="bg-white">
+          <div className="flex justify-between items-center px-4 py-2 bg-white border-b border-[#0000001A]">
+            <div className="flex items-center gap-2">
+              <Menu className="h-5 w-5 text-[#00000099]" />
+              <span className="text-sm font-medium text-[#000000DE]">Menu</span>
             </div>
-            <div className="flex justify-between items-center gap-2 px-2">
+            <div className="flex items-center gap-2">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#00000099]" />
+                <Input 
+                  placeholder="Search..." 
+                  className="w-[280px] pl-9 bg-white border-[#0000001A] text-[#000000DE] placeholder:text-[#00000099]"
+                />
+              </div>
               <UserNav user={user} />
             </div>
           </div>
-          <Separator />
-          <Outlet />
+          <div className="p-4">
+            <Outlet />
+          </div>
         </ResizablePanel>
       </ResizablePanelGroup>
     </TooltipProvider>

@@ -143,18 +143,21 @@ const CreateCompanyForm = ({ isOpen, onClose }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
-      <ModalContent maxW="80%" w="70%">
-        <ModalHeader>Create New Company</ModalHeader>
-        <ModalCloseButton />
+      <ModalContent maxW="80%" w="70%" bg="gray.900" color="gray.100" borderWidth={1} borderColor="gray.700">
+        <ModalHeader bg="gray.900" color="gray.100">Create New Company</ModalHeader>
+        <ModalCloseButton color="gray.100" />
         <ModalBody>
           <form onSubmit={handleSubmit}>
             <FormControl>
-              <FormLabel>Avatar</FormLabel>
+              <FormLabel color="gray.100">Avatar</FormLabel>
               <Image as={Avatar} src={formCompany.logo} key={imageKey} />
               <Button
                 variant="outline"
+                bg="gray.800"
+                color="gray.100"
+                borderColor="gray.700"
+                _hover={{ bg: "gray.700" }}
                 onClick={() => {
-                  // Imma do the forbidden, ,-,
                   document.getElementById("logo").click();
                 }}>
                 {isUploading ? <Spinner /> : "Change logo"}
@@ -172,80 +175,88 @@ const CreateCompanyForm = ({ isOpen, onClose }) => {
             <VStack spacing={4}>
               <SimpleGrid columns={2} spacing={4} w="full">
                 <FormControl isInvalid={errors.name} isRequired>
-                  <FormLabel>Company Name</FormLabel>
-                  <Input name="name" onChange={handleChange} />
+                  <FormLabel color="gray.100">Company Name</FormLabel>
+                  <Input name="name" onChange={handleChange} bg="gray.800" color="gray.100" borderColor="gray.700" _placeholder={{ color: "gray.400" }} />
                   {errors.name && <Text color="red.500">{errors.name}</Text>}
                 </FormControl>
                 <FormControl>
-                  <FormLabel>Company Type</FormLabel>
-                  <Input name="companyType" onChange={handleChange} />
+                  <FormLabel color="gray.100">Company Type</FormLabel>
+                  <Input name="companyType" onChange={handleChange} bg="gray.800" color="gray.100" borderColor="gray.700" _placeholder={{ color: "gray.400" }} />
                   {errors.companyType && (
                     <Text color="red.500">{errors.companyType}</Text>
                   )}
                 </FormControl>
                 <FormControl isInvalid={errors.industry} isRequired>
-                  <FormLabel>Industry</FormLabel>
-                  <Input name="industry" onChange={handleChange} />
+                  <FormLabel color="gray.100">Industry</FormLabel>
+                  <Input name="industry" onChange={handleChange} bg="gray.800" color="gray.100" borderColor="gray.700" _placeholder={{ color: "gray.400" }} />
                   {errors.industry && <Text color="red.500">{errors.industry}</Text>}
                 </FormControl>
                 <FormControl>
-                  <FormLabel>Description</FormLabel>
-                  <Input name="description" onChange={handleChange} />
+                  <FormLabel color="gray.100">Description</FormLabel>
+                  <Input name="description" onChange={handleChange} bg="gray.800" color="gray.100" borderColor="gray.700" _placeholder={{ color: "gray.400" }} />
                   {errors.description && (
                     <Text color="red.500">{errors.description}</Text>
                   )}
                 </FormControl>
                 <FormControl>
-                  <FormLabel>Website</FormLabel>
-                  <Input name="website" onChange={handleChange} />
+                  <FormLabel color="gray.100">Website</FormLabel>
+                  <Input name="website" onChange={handleChange} bg="gray.800" color="gray.100" borderColor="gray.700" _placeholder={{ color: "gray.400" }} />
                   {errors.website && <Text color="red.500">{errors.website}</Text>}
                 </FormControl>
                 <FormControl>
-                  <FormLabel>Rating</FormLabel>
+                  <FormLabel color="gray.100">Rating</FormLabel>
                   <Select
                     value={selectedRating}
                     onChange={handleStatusChange}
-                    placeholder="Select Status">
+                    placeholder="Select Status"
+                    bg="gray.800"
+                    color="gray.100"
+                    borderColor="gray.700"
+                    _placeholder={{ color: "gray.400" }}
+                  >
                     {statusOptions.map((option) => (
-                      <option key={option} value={option}>
+                      <option key={option} value={option} style={{ background: '#1a202c', color: '#f3f4f6' }}>
                         {option}
                       </option>
                     ))}
-                  </Select>{" "}
+                  </Select>
                 </FormControl>
-
                 <FormControl>
-                  <FormLabel>Ticker Symbol</FormLabel>
-                  <Input name="tickerSymbol" onChange={handleChange} />
+                  <FormLabel color="gray.100">Ticker Symbol</FormLabel>
+                  <Input name="tickerSymbol" onChange={handleChange} bg="gray.800" color="gray.100" borderColor="gray.700" _placeholder={{ color: "gray.400" }} />
                   {errors.tickerSymbol && (
                     <Text color="red.500">{errors.tickerSymbol}</Text>
                   )}
                 </FormControl>
                 <FormControl>
-                  <FormLabel>Employees</FormLabel>
-                  <Input type="number" name="employees" onChange={handleChange} />
+                  <FormLabel color="gray.100">Employees</FormLabel>
+                  <Input type="number" name="employees" onChange={handleChange} bg="gray.800" color="gray.100" borderColor="gray.700" _placeholder={{ color: "gray.400" }} />
                   {errors.employees && <Text color="red.500">{errors.employees}</Text>}
                 </FormControl>
                 <FormControl>
-                  <FormLabel>Annual Revenue</FormLabel>
-                  <Input type="number" name="annualRevenue" onChange={handleChange} />
+                  <FormLabel color="gray.100">Annual Revenue</FormLabel>
+                  <Input type="number" name="annualRevenue" onChange={handleChange} bg="gray.800" color="gray.100" borderColor="gray.700" _placeholder={{ color: "gray.400" }} />
                   {errors.annualRevenue && (
                     <Text color="red.500">{errors.annualRevenue}</Text>
                   )}
                 </FormControl>
                 <FormControl>
-                  <FormLabel>Tag</FormLabel>
-                  <Input name="tag" onChange={handleChange} />
+                  <FormLabel color="gray.100">Tag</FormLabel>
+                  <Input name="tag" onChange={handleChange} bg="gray.800" color="gray.100" borderColor="gray.700" _placeholder={{ color: "gray.400" }} />
                   {errors.tag && <Text color="red.500">{errors.tag}</Text>}
                 </FormControl>
               </SimpleGrid>
               <SimpleGrid columns={2} spacing={4} w="full">
                 <FormControl>
-                  <FormLabel>Billing Address</FormLabel>
+                  <FormLabel color="gray.100">Billing Address</FormLabel>
                   <Input
                     placeholder="Street"
                     name="billingAddress.Street"
                     onChange={handleChange}
+                    bg="gray.800"
+                    color="gray.100"
+                    borderColor="gray.700"
+                    _placeholder={{ color: "gray.400" }}
                   />
                   {errors["billingAddress.Street"] && (
                     <Text color="red.500">{errors["billingAddress.Street"]}</Text>
@@ -255,6 +266,10 @@ const CreateCompanyForm = ({ isOpen, onClose }) => {
                     name="billingAddress.City"
                     onChange={handleChange}
                     mt={2}
+                    bg="gray.800"
+                    color="gray.100"
+                    borderColor="gray.700"
+                    _placeholder={{ color: "gray.400" }}
                   />
                   {errors["billingAddress.City"] && (
                     <Text color="red.500">{errors["billingAddress.City"]}</Text>
@@ -264,6 +279,10 @@ const CreateCompanyForm = ({ isOpen, onClose }) => {
                     name="billingAddress.State"
                     onChange={handleChange}
                     mt={2}
+                    bg="gray.800"
+                    color="gray.100"
+                    borderColor="gray.700"
+                    _placeholder={{ color: "gray.400" }}
                   />
                   {errors["billingAddress.State"] && (
                     <Text color="red.500">{errors["billingAddress.State"]}</Text>
@@ -273,6 +292,10 @@ const CreateCompanyForm = ({ isOpen, onClose }) => {
                     name="billingAddress.BillingCode"
                     onChange={handleChange}
                     mt={2}
+                    bg="gray.800"
+                    color="gray.100"
+                    borderColor="gray.700"
+                    _placeholder={{ color: "gray.400" }}
                   />
                   {errors["billingAddress.BillingCode"] && (
                     <Text color="red.500">{errors["billingAddress.BillingCode"]}</Text>
@@ -282,17 +305,25 @@ const CreateCompanyForm = ({ isOpen, onClose }) => {
                     name="billingAddress.PostalCode"
                     onChange={handleChange}
                     mt={2}
+                    bg="gray.800"
+                    color="gray.100"
+                    borderColor="gray.700"
+                    _placeholder={{ color: "gray.400" }}
                   />
                   {errors["billingAddress.PostalCode"] && (
                     <Text color="red.500">{errors["billingAddress.PostalCode"]}</Text>
                   )}
                 </FormControl>
                 <FormControl>
-                  <FormLabel>Shipping Address</FormLabel>
+                  <FormLabel color="gray.100">Shipping Address</FormLabel>
                   <Input
                     placeholder="Street"
                     name="shippingAddress.Street"
                     onChange={handleChange}
+                    bg="gray.800"
+                    color="gray.100"
+                    borderColor="gray.700"
+                    _placeholder={{ color: "gray.400" }}
                   />
                   {errors["shippingAddress.Street"] && (
                     <Text color="red.500">{errors["shippingAddress.Street"]}</Text>
@@ -302,6 +333,10 @@ const CreateCompanyForm = ({ isOpen, onClose }) => {
                     name="shippingAddress.City"
                     onChange={handleChange}
                     mt={2}
+                    bg="gray.800"
+                    color="gray.100"
+                    borderColor="gray.700"
+                    _placeholder={{ color: "gray.400" }}
                   />
                   {errors["shippingAddress.City"] && (
                     <Text color="red.500">{errors["shippingAddress.City"]}</Text>
@@ -311,6 +346,10 @@ const CreateCompanyForm = ({ isOpen, onClose }) => {
                     name="shippingAddress.ShippingCode"
                     onChange={handleChange}
                     mt={2}
+                    bg="gray.800"
+                    color="gray.100"
+                    borderColor="gray.700"
+                    _placeholder={{ color: "gray.400" }}
                   />
                   {errors["shippingAddress.ShippingCode"] && (
                     <Text color="red.500">{errors["shippingAddress.ShippingCode"]}</Text>
@@ -320,6 +359,10 @@ const CreateCompanyForm = ({ isOpen, onClose }) => {
                     name="shippingAddress.PostalCode"
                     onChange={handleChange}
                     mt={2}
+                    bg="gray.800"
+                    color="gray.100"
+                    borderColor="gray.700"
+                    _placeholder={{ color: "gray.400" }}
                   />
                   {errors["shippingAddress.PostalCode"] && (
                     <Text color="red.500">{errors["shippingAddress.PostalCode"]}</Text>
@@ -330,16 +373,19 @@ const CreateCompanyForm = ({ isOpen, onClose }) => {
             </VStack>
           </form>
         </ModalBody>
-        <ModalFooter>
+        <ModalFooter bg="gray.900" color="gray.100">
           <Button
             colorScheme="blue"
             mr={3}
             type="submit"
             disabled={isLoading}
-            onClick={handleSubmit}>
+            onClick={handleSubmit}
+            bg="blue.700"
+            color="gray.100"
+            _hover={{ bg: "blue.800" }}>
             Save
           </Button>
-          <Button variant="ghost" onClick={onClose}>
+          <Button variant="ghost" onClick={onClose} bg="gray.700" color="gray.100" _hover={{ bg: "gray.600" }}>
             Cancel
           </Button>
         </ModalFooter>
